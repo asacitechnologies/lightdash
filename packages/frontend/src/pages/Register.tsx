@@ -130,7 +130,7 @@ const Register: FC = () => {
                 />
                 <Card p="xl" radius="xs" withBorder shadow="xs">
                     <Title order={3} ta="center" mb="md">
-                        Sign up
+                        Sign up Ypooo
                     </Title>
                     {logins}
                 </Card>
@@ -142,7 +142,7 @@ const Register: FC = () => {
                         href="https://www.lightdash.com/privacy-policy"
                         target="_blank"
                     >
-                        Privacy Policy
+                        Privacy Policyooop
                     </Anchor>{' '}
                     and our{' '}
                     <Anchor

@@ -9,31 +9,16 @@ import {
     SEED_ORG_1_ADMIN_PASSWORD,
 } from '@lightdash/common';
 
-import {
-    ActionIcon,
-    Anchor,
-    Button,
-    Card,
-    Divider,
-    Image,
-    PasswordInput,
-    Stack,
-    Text,
-    TextInput,
-    Title,
-} from '@mantine/core';
+import { Card, Title } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
-import { IconX } from '@tabler/icons-react';
+import { useTranslation } from 'react-i18next';
 import { Redirect, useLocation } from 'react-router-dom';
 import { z } from 'zod';
-import MantineIcon from '../../../components/common/MantineIcon';
-import { ThirdPartySignInButton } from '../../../components/common/ThirdPartySignInButton';
 import PageSpinner from '../../../components/PageSpinner';
 import useToaster from '../../../hooks/toaster/useToaster';
 import { useFlashMessages } from '../../../hooks/useFlashMessages';
 import { useApp } from '../../../providers/AppProvider';
 import { useTracking } from '../../../providers/TrackingProvider';
-import LightdashLogo from '../../../svgs/lightdash-black.svg';
 import {
     useFetchLoginOptions,
     useLoginWithEmailMutation,
@@ -165,115 +150,32 @@ const Login: FC<{}> = () => {
         return <Redirect to={redirectUrl} />;
     }
 
+    // -----------------------------------------------------
+    const { t, i18n } = useTranslation();
+
+    const changeLanguage = (language: string) => {
+        i18n.changeLanguage(language);
+    };
+    // -----------------------------------------------------
     return (
         <>
-            <Image
-                src={LightdashLogo}
-                alt="lightdash logo"
-                width={130}
-                mx="auto"
-                my="lg"
-            />
             <Card p="xl" radius="xs" withBorder shadow="xs">
                 <Title order={3} ta="center" mb="md">
-                    Sign in
+                    Sign in AZERTY
                 </Title>
-                <form
-                    name="login"
-                    onSubmit={form.onSubmit(() => handleFormSubmit())}
-                >
-                    <Stack spacing="lg">
-                        <TextInput
-                            label="Email address"
-                            name="email"
-                            placeholder="Your email address"
-                            required
-                            {...form.getInputProps('email')}
-                            disabled={disableControls}
-                            rightSection={
-                                preCheckEmail ? (
-                                    <ActionIcon
-                                        onClick={() => {
-                                            setPreCheckEmail(undefined);
-                                            form.setValues({
-                                                email: '',
-                                                password: '',
-                                            });
-                                        }}
-                                    >
-                                        <MantineIcon icon={IconX} />
-                                    </ActionIcon>
-                                ) : null
-                            }
-                        />
-                        {isEmailLoginAvailable && formStage === 'login' && (
-                            <>
-                                <PasswordInput
-                                    label="Password"
-                                    name="password"
-                                    placeholder="Your password"
-                                    required
-                                    autoFocus
-                                    {...form.getInputProps('password')}
-                                    disabled={disableControls}
-                                />
-                                <Anchor href="/recover-password" mx="auto">
-                                    Forgot your password?
-                                </Anchor>
-                                <Button
-                                    type="submit"
-                                    loading={disableControls}
-                                    data-cy="signin-button"
-                                >
-                                    Sign in
-                                </Button>
-                            </>
-                        )}
-                        {formStage === 'precheck' && (
-                            <Button
-                                type="submit"
-                                loading={disableControls}
-                                data-cy="signin-button"
-                            >
-                                Continue
-                            </Button>
-                        )}
-                        {ssoOptions.length > 0 && (
-                            <>
-                                {(isEmailLoginAvailable ||
-                                    formStage === 'precheck') && (
-                                    <Divider
-                                        my="sm"
-                                        labelPosition="center"
-                                        label={
-                                            <Text
-                                                color="gray.5"
-                                                size="sm"
-                                                fw={500}
-                                            >
-                                                OR
-                                            </Text>
-                                        }
-                                    />
-                                )}
-                                <Stack>
-                                    {ssoOptions.map((providerName) => (
-                                        <ThirdPartySignInButton
-                                            key={providerName}
-                                            providerName={providerName}
-                                            redirect={redirectUrl}
-                                            disabled={disableControls}
-                                        />
-                                    ))}
-                                </Stack>
-                            </>
-                        )}
-                        <Text mx="auto" mt="md">
-                            Don't have an account?{' '}
-                            <Anchor href="/register">Sign up</Anchor>
-                        </Text>
-                    </Stack>
-                </form>
+
+                <div>
+                    <h1>{t('welcome')}</h1>
+                    <p>{t('description')}</p>
+
+                    {/* Boutons pour changer de langue */}
+                    <button onClick={() => changeLanguage('fr')}>
+                        Français
+                    </button>
+                    <button onClick={() => changeLanguage('en')}>
+                        English
+                    </button>
+                </div>
             </Card>
         </>
     );

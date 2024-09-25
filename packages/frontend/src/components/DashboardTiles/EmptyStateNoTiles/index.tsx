@@ -5,7 +5,7 @@ import {
     IconLayoutDashboard,
     IconPlayerPlay,
 } from '@tabler/icons-react';
-import { SetStateAction, type FC } from 'react';
+import { type FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useChartSummaries } from '../../../hooks/useChartSummaries';
 import useCreateInAnySpaceAccess from '../../../hooks/user/useCreateInAnySpaceAccess';
@@ -100,7 +100,7 @@ const EmptyStateNoTiles: FC<SavedChartsAvailableProps> = ({
                                     }
                                     href={`/projects/${projectUuid}/tables`}
                                 >
-                                    Run a query
+                                    ihbkgvbgv
                                 </MantineLinkButton>
                             </Can>
                         }
